@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+echo "Removing all exited containers..."
+LIST=`docker ps -f status=exited -q | xargs`
+if [ -z "$LIST" ]; then
+    echo " No one found."
+else
+    docker rm $LIST
+fi
+
+echo -e "\nRemoving all dangling images..."
+LIST=`docker images -f dangling=true -q | xargs`
+if [ -z "$LIST" ]; then
+    echo " No one found."
+else
+    docker rmi $LIST
+fi
+
+echo -e "\nDone."
