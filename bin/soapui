@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/SoapUI-5.2.1/bin
+sh soapui.sh
