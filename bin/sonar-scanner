@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/home/marco/programmi/sonar-scanner-2.6.1/bin/./sonar-scanner
+
