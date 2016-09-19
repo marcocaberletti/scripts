@@ -27,7 +27,7 @@ package_list=\
  lyx \
  nautilus-dropbox \
  nmap \
- nspluginwrapper \
+ pygpgme \
  rhythmbox \
  smartmontools \
  sqlitebrowser \
