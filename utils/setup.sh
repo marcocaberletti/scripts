@@ -4,8 +4,8 @@ set -xe
 
 package_list=\
 "alsa-plugins-pulseaudio \
- akmod-nvidia \
  bind-utils \
+ calibre \
  dropbox \
  flash-plugin \
  gimp \
@@ -21,7 +21,6 @@ package_list=\
  gstreamer-plugins-good \
  gstreamer-plugins-good-extras \
  k3b \
- kmod-nvidia \
  libreoffice-base \
  libcurl \
  lyx \
