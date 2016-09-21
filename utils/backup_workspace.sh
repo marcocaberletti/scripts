@@ -1,27 +1,35 @@
 #!/bin/sh
 
-BASEDIR=/home/marco/workspace
-DEST_FILE=/home/backup/marco/workspace/workspace_$(date +'%Y-%m-%d_%H%M%S').tar.gz
+WORKSPACES="/home/marco/workspace /opt/workspace"
+DESTDIR=/home/marco/backup/workspace
 
-echo "Starting backup on "$(date)
+idx=1;
 
-cd $BASEDIR
-tar czf $DEST_FILE -C $BASEDIR * \
-  --exclude=*.class \
-  --exclude=*.gz \
-  --exclude=*.jar \
-  --exclude=*.war \
-  --exclude=*.log \
-  --exclude=*git* \
-  --exclude=*metadata* \
-  --exclude=*.exe \
-  --exclude=*.zip \
-  --exclude=*.pdf \
-  --exclude=*deploy* \
-  --exclude='RemoteSystemsTempFiles' \
-  --exclude=*target* \
+for basedir in $WORKSPACES; do
+	FILENAME=workspace-${idx}_`date +'%Y-%m-%d_%H%M%S'`.tar.gz
+	DEST_FILE=$DESTDIR/$FILENAME
 
-echo "Archive done"
+	echo "Starting backup of workspace-$idx on "`date`
 
+	cd $basedir
+	tar czf $DEST_FILE -C $basedir * \
+	  --exclude=*.class \
+	  --exclude=*.gz \
+	  --exclude=*.jar \
+	  --exclude=*.war \
+	  --exclude=*.log \
+	  --exclude=*git* \
+	  --exclude=*metadata* \
+	  --exclude=*.exe \
+	  --exclude=*.zip \
+	  --exclude=*.pdf \
+	  --exclude=*deploy* \
+	  --exclude='RemoteSystemsTempFiles' \
+	  --exclude=*target* \
 
-echo "Finished on "$(date)
+	echo "Archive done"
+	
+	idx=$((idx + 1))
+done
+
+echo "Finished on "`date`
