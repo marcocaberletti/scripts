@@ -16,4 +16,12 @@ else
     docker rmi $LIST
 fi
 
+echo -e "\nRemoving al dangling volumes..."
+LIST=`docker volume ls --filter=dangling=true -q | xargs` 
+if [ -z "$LIST" ]; then
+	echo " No one found."
+else
+	docker volume rm $LIST
+fi
+
 echo -e "\nDone."
