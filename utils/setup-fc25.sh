@@ -27,29 +27,37 @@ package_list=\
  NetworkManager-openconnect-gnome \
  nmap \
  pygpgme \
- rhythmbox \
  smartmontools \
  sqlitebrowser \
  sysstat \
+ terminator \
  thunderbird \
  tomboy \
- transmission-common \
- unetbootin \
  unrar \
  unzip \
  vim-enhanced \
  vlc"
 
+## Add RPM Fusion repos
 dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+## Install Google Chrome
 if [ ! -f /etc/yum.repos.d/google-chrome.repo ]; then
   dnf install -y /home/marco/programmi/google-chrome-stable_current_x86_64.rpm
 fi
 
+## Install Adobe repo
 dnf install -y http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
 
+## Update & install
 dnf update -y && dnf install -y $package_list
 
+## Enable SSH
+systemctl enable sshd && systemctl start sshd
+
+## Add db dump cron job
+crontab -u marco -r
+echo "0 * * * *  /home/marco/bin/db-dump" | crontab -u marco -
 
 
