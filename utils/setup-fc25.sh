@@ -2,6 +2,9 @@
 
 set -xe
 
+INSTALL_ECLIPSE=${INSTALL_ECLIPSE:-'n'}
+ENABLE_CRONTAB=${ENABLE_CRONTAB:-'n'}
+
 package_list=\
 "alsa-plugins-pulseaudio \
  bind-utils \
@@ -37,9 +40,28 @@ package_list=\
  unzip \
  vim-enhanced \
  vlc"
+ 
+eclipse_packages=\
+"eclipse-platform \
+ eclipse-anyedit \
+ eclipse-checkstyle \
+ eclipse-dltk-sh \
+ eclipse-eclemma \
+ eclipse-egit-github \
+ eclipse-jdt \
+ eclipse-linuxtools \
+ eclipse-m2e-core \
+ eclipse-mpc \
+ eclipse-nls-it \
+ eclipse-pydev \
+ eclipse-rpm-editor \
+ eclipse-webtools-javaee \
+ eclipse-webtools-servertools"
 
 ## Add RPM Fusion repos
-dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf install -y \
+	http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+	http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 ## Install Google Chrome
 if [ ! -f /etc/yum.repos.d/google-chrome.repo ]; then
@@ -56,8 +78,12 @@ dnf update -y && dnf install -y $package_list
 ## Enable SSH
 systemctl enable sshd && systemctl start sshd
 
-## Add db dump cron job
-crontab -u marco -r
-echo "0 * * * *  /home/marco/bin/db-dump" | crontab -u marco -
+if [ $ENABLE_CRONTAB == 'y' ]; then
+  ## Add db dump cron job
+  crontab -u marco -r
+  echo "0 * * * *  /home/marco/bin/db-dump" | crontab -u marco -
+fi
 
-
+if [ $INSTALL_ECLIPSE == 'y' ]; then
+  dnf install -y $eclipse_packages
+fi
