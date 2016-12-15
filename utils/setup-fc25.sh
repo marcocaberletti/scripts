@@ -8,6 +8,7 @@ package_list=\
 "alsa-plugins-pulseaudio \
  bind-utils \
  calibre \
+ community-mysql \
  dropbox \
  flash-plugin \
  gimp \
@@ -21,6 +22,7 @@ package_list=\
  gstreamer1-plugins-ugly \
  gstreamer-plugins-good \
  gstreamer-plugins-good-extras \
+ jq \
  k3b \
  libcurl \
  lyx \
