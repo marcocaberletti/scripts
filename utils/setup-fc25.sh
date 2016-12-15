@@ -3,6 +3,7 @@
 set -xe
 
 INSTALL_ECLIPSE=${INSTALL_ECLIPSE:-'n'}
+ENABLE_CRONTAB=${ENABLE_CRONTAB:-'n'}
 
 package_list=\
 "alsa-plugins-pulseaudio \
@@ -34,15 +35,14 @@ package_list=\
  smartmontools \
  sqlitebrowser \
  sysstat \
+ terminator \
  thunderbird \
  tomboy \
- transmission-common \
- unetbootin \
  unrar \
  unzip \
  vim-enhanced \
  vlc"
-
+ 
 eclipse_packages=\
 "eclipse-platform \
  eclipse-anyedit \
@@ -60,19 +60,31 @@ eclipse_packages=\
  eclipse-webtools-javaee \
  eclipse-webtools-servertools"
 
-
+## Add RPM Fusion repos
 dnf install -y \
 	http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
 	http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+## Install Google Chrome
 if [ ! -f /etc/yum.repos.d/google-chrome.repo ]; then
   dnf install -y /home/marco/programmi/google-chrome-stable_current_x86_64.rpm
 fi
 
+## Install Adobe repo
 dnf install -y http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
 
+## Update & install
 dnf update -y && dnf install -y $package_list
+
+## Enable SSH
+systemctl enable sshd && systemctl start sshd
+
+if [ $ENABLE_CRONTAB == 'y' ]; then
+  ## Add db dump cron job
+  crontab -u marco -r
+  echo "0 * * * *  /home/marco/bin/db-dump" | crontab -u marco -
+fi
 
 if [ $INSTALL_ECLIPSE == 'y' ]; then
   dnf install -y $eclipse_packages
