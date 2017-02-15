@@ -36,6 +36,13 @@ package_list=\
  sqlitebrowser \
  sysstat \
  terminator \
+ texlive-babel-english \
+ texlive-babel-italian \
+ texlive-emptypage \
+ texlive-lipsum \
+ texlive-titlesec \
+ texlive-tocloft \
+ texlive-wrapconfig \
  thunderbird \
  tomboy \
  unrar \
