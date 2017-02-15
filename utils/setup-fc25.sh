@@ -39,10 +39,12 @@ package_list=\
  texlive-babel-english \
  texlive-babel-italian \
  texlive-emptypage \
+ texlive-etoolbox \
  texlive-lipsum \
  texlive-titlesec \
  texlive-tocloft \
- texlive-wrapconfig \
+ texlive-wrapfig \
+ texlive-xifthen \
  thunderbird \
  tomboy \
  unrar \
