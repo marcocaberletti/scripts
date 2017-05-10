@@ -2,7 +2,7 @@
 
 set -xe
 
-registry_host="${DOCKER_REGISTRY_HOST:-cloud-vm181.cloud.cnaf.infn.it}"
+registry_host="${DOCKER_REGISTRY_HOST:-cloud-vm114.cloud.cnaf.infn.it}"
 datadir="${REGISTRY_DATA_DIR:-/srv/registry/data}"
 basedir="$datadir/docker/registry/v2/repositories"
 username="${REGISTRY_USERNAME:-}"

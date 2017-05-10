@@ -27,6 +27,7 @@ package_list=\
  k3b \
  libcurl \
  lyx \
+ mysql-connector-java \
  nautilus-dropbox \
  network-manager-applet \
  NetworkManager-openconnect-gnome \

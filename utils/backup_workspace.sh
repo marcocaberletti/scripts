@@ -23,6 +23,7 @@ for basedir in $WORKSPACES; do
 	  --exclude=*.exe \
 	  --exclude=*.zip \
 	  --exclude=*.pdf \
+	  --exclude=*.rpm \
 	  --exclude=*deploy* \
 	  --exclude='RemoteSystemsTempFiles' \
 	  --exclude=*target* \
