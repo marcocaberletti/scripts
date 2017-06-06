@@ -11,7 +11,9 @@ package_list=\
  calibre \
  community-mysql \
  dropbox \
+ exfat-utils \
  flash-plugin \
+ fuse-exfat \
  gimp \
  git \
  google-chrome-stable \
@@ -27,6 +29,7 @@ package_list=\
  k3b \
  libcurl \
  lyx \
+ mediawriter \
  mysql-connector-java \
  nautilus-dropbox \
  network-manager-applet \

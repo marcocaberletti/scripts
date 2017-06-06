@@ -10,6 +10,7 @@ package_list=\
  bind-utils \
  calibre \
  community-mysql \
+ dnf-automatic \
  dropbox \
  flash-plugin \
  gimp \
@@ -89,6 +90,11 @@ dnf update -y && dnf install -y $package_list
 
 ## Enable SSH
 systemctl enable sshd && systemctl start sshd
+
+## Enable automatic updates
+systemctl enable dnf-automatic-notifyonly.timer && systemctl start dnf-automatic-notifyonly.timer
+systemctl enable dnf-automatic-download.timer && systemctl start dnf-automatic-download.timer
+systemctl enable dnf-automatic-install.timer && systemctl start dnf-automatic-install.timer
 
 if [ $ENABLE_CRONTAB == 'y' ]; then
   ## Add db dump cron job

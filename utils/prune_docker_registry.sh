@@ -9,13 +9,14 @@ username="${REGISTRY_USERNAME:-}"
 password="${REGISTRY_PASSWORD:-}"
 registry_container_id="${REGISTRY_CONTAINER_ID:-docker-registry}"
 registry_conf_file="${REGISTRY_CONF_FILE:-/etc/docker/registry/config.yml}"
+count="${COUNT:-3}"
 
 cd $basedir
 
 repolist=`find -maxdepth 2 -mindepth 2 -type d | sed 's/\.\///g'`
 
 for repo in $repolist; do
-	hashlist=`ls $repo/_manifests/revisions/sha256 -t | tail -n +3`
+	hashlist=`ls $repo/_manifests/revisions/sha256 -t | tail -n +${count}`
 	
 	for elem in $hashlist; do
 		echo DELETE "https://$registry_host/v2/$repo/manifests/sha256:$elem"
