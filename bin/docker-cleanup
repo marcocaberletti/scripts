@@ -2,26 +2,27 @@
 
 echo "Removing all exited containers..."
 LIST=`docker ps -f status=exited -q | xargs`
-if [ -z "$LIST" ]; then
+if [ -z "${LIST}" ]; then
     echo " No one found."
 else
-    docker rm $LIST
+    docker rm ${LIST}
 fi
 
 echo -e "\nRemoving all dangling images..."
 LIST=`docker images -f dangling=true -q | xargs`
-if [ -z "$LIST" ]; then
+if [ -z "${LIST}" ]; then
     echo " No one found."
 else
-    docker rmi $LIST
+    docker rmi ${LIST}
 fi
 
 echo -e "\nRemoving all dangling volumes..."
 LIST=`docker volume ls --filter=dangling=true -q | xargs` 
-if [ -z "$LIST" ]; then
+if [ -z "${LIST}" ]; then
 	echo " No one found."
 else
-	docker volume rm $LIST
+	docker volume rm ${LIST}
 fi
 
 echo -e "\nDone."
+

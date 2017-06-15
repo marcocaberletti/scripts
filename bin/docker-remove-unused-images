@@ -9,22 +9,23 @@ LIST=`docker images | grep "<none>" | awk '{print $3}'`
 if [ -z "${LIST}" ]; then
     echo " No one found."
 else
-    docker rmi $LIST
+    docker rmi ${LIST}
 fi
 
 
 echo -e "\nRemoving all unused images..."
 
-docker ps -a | awk '{print $2}' | uniq | tail -n +2 > $used
-docker images | awk '{print $1":"$2}' | uniq | tail -n +2 > $all
+docker ps -a | awk '{print $2}' | uniq | tail -n +2 > ${used}
+docker images | awk '{print $1":"$2}' | uniq | tail -n +2 > ${all}
 
-LIST=`grep -v -f $used $all`
+LIST=`grep -v -f ${used} ${all}`
 if [ -z "${LIST}" ]; then
     echo " No one found."
 else
-    docker rmi $LIST
+    docker rmi ${LIST}
 fi
 
-rm $used $all
+rm ${used} ${all}
 
 echo -e "\nDone."
+

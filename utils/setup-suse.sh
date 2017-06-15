@@ -14,16 +14,21 @@ package_list=\
  gstreamer-plugins-good \
  gstreamer-plugins-ugly \
  gstreamer-plugins-good \
+ jq \
  k3b \
  libreoffice-base \
  lyx \
+ mysql-community-server-client \
+ mysql-workbench \
  nautilus-extension-dropbox \
  nmap \
  python-gpgme \
+ python-pip \
  smartmontools \
  sqlitebrowser \
  sysstat \
  thunderbird \
+ tree \
  unrar \
  unzip \
  vlc"
