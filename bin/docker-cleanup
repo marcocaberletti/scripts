@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Removing all exited containers..."
-LIST=`docker ps -f status=exited -q | xargs`
+LIST=`docker ps -f status=exited -f status=created -q | xargs`
 if [ -z "${LIST}" ]; then
     echo " No one found."
 else
