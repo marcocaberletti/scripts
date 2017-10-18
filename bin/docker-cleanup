@@ -17,12 +17,10 @@ else
 fi
 
 echo -e "\nRemoving all dangling volumes..."
-LIST=`docker volume ls --filter=dangling=true -q | xargs` 
-if [ -z "${LIST}" ]; then
-	echo " No one found."
-else
-	docker volume rm ${LIST}
-fi
+docker volume prune -f
+
+echo -e "\nRemoving all unused network..."
+docker network prune -f
 
 echo -e "\nDone."
 
