@@ -25,6 +25,7 @@ package_list=\
  gstreamer-plugins-good \
  gstreamer-plugins-good-extras \
  jq \
+ java-1.8.0-openjdk-devel \
  k3b \
  libcurl \
  lyx \
@@ -80,6 +81,12 @@ dnf install -y \
 if [ ! -f /etc/yum.repos.d/google-chrome.repo ]; then
   dnf install -y /home/marco/programmi/google-chrome-stable_current_x86_64.rpm
 fi
+
+## Install Slack
+dnf install -y /home/marco/programmi/slack-2.7.0-0.1.fc21.x86_64.rpm
+
+## Install Atom
+dnf install -y /home/marco/programmi/atom.x86_64.rpm
 
 ## Install Adobe repo
 dnf install -y http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
