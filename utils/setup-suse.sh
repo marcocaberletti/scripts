@@ -9,6 +9,7 @@ package_list=\
  gimp \
  git \
  gnome-subtitles \
+ go \
  google-chrome-stable \
  gstreamer-plugins-base \
  gstreamer-plugins-good \
@@ -17,6 +18,7 @@ package_list=\
  jq \
  k3b \
  libreoffice-base \
+ libreoffice-l10n-it \
  lyx \
  mysql-community-server-client \
  mysql-workbench \
