@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WORKSPACES="/home/marco/workspace /workspace"
+WORKSPACES="/home/marco/workspace"
 DESTDIR=/home/marco/backup/workspace
 
 idx=1;
