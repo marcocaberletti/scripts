@@ -24,11 +24,14 @@ package_list=\
  mysql-workbench \
  nautilus-extension-dropbox \
  nmap \
+ npm \
  python-gpgme \
  python-pip \
  smartmontools \
  sqlitebrowser \
  sysstat \
+ texlive-emptypage \
+ texlive-tocloft \
  thunderbird \
  tree \
  unrar \
