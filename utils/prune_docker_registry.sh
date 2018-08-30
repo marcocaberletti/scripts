@@ -9,20 +9,24 @@ username="${REGISTRY_USERNAME:-}"
 password="${REGISTRY_PASSWORD:-}"
 registry_container_id="${REGISTRY_CONTAINER_ID:-docker-registry}"
 registry_conf_file="${REGISTRY_CONF_FILE:-/etc/docker/registry/config.yml}"
-count="${COUNT:-3}"
+count="${COUNT:-5}"
 
-cd $basedir
+cd ${basedir}
 
 repolist=`find -maxdepth 2 -mindepth 2 -type d | sed 's/\.\///g'`
 
-for repo in $repolist; do
-	hashlist=`ls $repo/_manifests/revisions/sha256 -t | tail -n +${count}`
+for repo in ${repolist}; do
+	taglist=`ls ${repo}/_manifests/tags`
 	
-	for elem in $hashlist; do
-		echo DELETE "https://$registry_host/v2/$repo/manifests/sha256:$elem"
-		curl -k -u $username:$password -X DELETE "https://$registry_host/v2/$repo/manifests/sha256:$elem"
+	for tag in ${taglist}; do
+		hashlist=`ls ${repo}/_manifests/tags/${tag}/index/sha256 -t | tail -n +${count}`
+		
+		for elem in ${hashlist}; do
+		echo DELETE "https://${registry_host}/v2/${repo}/manifests/sha256:${elem}"
+		curl -k -u ${username}:${password} -X DELETE "https://${registry_host}/v2/${repo}/manifests/sha256:${elem}"
+		done
 	done
+	
 done
 
-
-docker exec -ti $registry_container_id  bin/registry garbage-collect $registry_conf_file
+docker exec ${registry_container_id}  bin/registry garbage-collect ${registry_conf_file}

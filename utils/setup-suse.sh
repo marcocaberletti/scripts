@@ -9,6 +9,7 @@ package_list=\
  gimp \
  git \
  gnome-subtitles \
+ go \
  google-chrome-stable \
  gstreamer-plugins-base \
  gstreamer-plugins-good \
@@ -17,16 +18,20 @@ package_list=\
  jq \
  k3b \
  libreoffice-base \
+ libreoffice-l10n-it \
  lyx \
  mysql-community-server-client \
  mysql-workbench \
  nautilus-extension-dropbox \
  nmap \
+ npm \
  python-gpgme \
  python-pip \
  smartmontools \
  sqlitebrowser \
  sysstat \
+ texlive-emptypage \
+ texlive-tocloft \
  thunderbird \
  tree \
  unrar \

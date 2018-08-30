@@ -33,7 +33,7 @@ while getopts ":hu:p:H:r:q:" opt; do
   esac
 done
 
-url=${baseurl}/service/siesta/rest/v1/script/repoassetslister/run
+url=${baseurl}/service/rest/v1/script/repoassetslister/run
 list=`curl -s -XPOST -u ${username}:${password} ${url} \
    -H "Content-Type: text/plain" \
    -d "{\"repoName\":\"${reponame}\", \"startDate\":\"1970-01-01\"}" \

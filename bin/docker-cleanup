@@ -1,20 +1,10 @@
 #!/usr/bin/env bash
 
 echo "Removing all exited containers..."
-LIST=`docker ps -f status=exited -f status=created -q | xargs`
-if [ -z "${LIST}" ]; then
-    echo " No one found."
-else
-    docker rm ${LIST}
-fi
+docker container prune -f
 
 echo -e "\nRemoving all dangling images..."
-LIST=`docker images -f dangling=true -q | xargs`
-if [ -z "${LIST}" ]; then
-    echo " No one found."
-else
-    docker rmi ${LIST}
-fi
+docker image prune -f
 
 echo -e "\nRemoving all dangling volumes..."
 docker volume prune -f
@@ -23,4 +13,3 @@ echo -e "\nRemoving all unused network..."
 docker network prune -f
 
 echo -e "\nDone."
-
