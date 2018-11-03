@@ -28,6 +28,7 @@ package_list=\
  bind-utils \
  calibre \
  code \
+ chrome-gnome-shell \
  dnf-automatic \
  dropbox \
  gimp \
