@@ -23,18 +23,11 @@ cp -v /home/marco/programmi/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
-## Install Adobe repo
-#dnf install -y http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
-#rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
-
 package_list=\
-"alsa-plugins-pulseaudio \
- awscli \
+"awscli \
  bind-utils \
  calibre \
  code \
- chrome-gnome-shell \
- dnf-automatic \
  dropbox \
  gimp \
  git \
@@ -53,9 +46,7 @@ package_list=\
  libcurl \
  nautilus-dropbox \
  nmap \
- redis \
  slack \
- smartmontools \
  sqlitebrowser \
  sysstat \
  terminator \
@@ -77,7 +68,6 @@ package_list=\
  texlive-xetex \
  texlive-xifthen \
  thunderbird \
- tomboy \
  unrar \
  unzip \
  vim \
@@ -88,10 +78,3 @@ dnf update -y && dnf install -y $package_list
 
 ## Enable SSH
 systemctl enable sshd && systemctl start sshd
-
-if [ $ENABLE_CRONTAB == 'y' ]; then
-  ## Add db dump cron job
-  crontab -u marco -r
-  echo "0 * * * *  /home/marco/bin/db-dump" | crontab -u marco -
-fi
-

@@ -9,36 +9,31 @@ dnf install -y \
 	http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
 	http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-## Install Google Chrome repo
-cp -v /home/marco/programmi/google-chrome.repo /etc/yum.repos.d/google-chrome.repo
-
 ## Install Slack repo
 cp -v /home/marco/programmi/slack.repo /etc/yum.repos.d/slack.repo
 
 ## Install Kube repo
 cp -v /home/marco/programmi/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
 
-
 ## Install VS Code repo
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
-## Install Adobe repo
-#dnf install -y http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
-#rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+## Packer repo
+dnf install -y dnf-plugins-core
+dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+dnf -y install packer
 
 package_list=\
-"alsa-plugins-pulseaudio \
+"ansible \
  awscli \
  bind-utils \
  calibre \
  code \
- chrome-gnome-shell \
- dnf-automatic \
  dropbox \
+ environment-modules \
  gimp \
  git \
- google-chrome-stable \
  gnome-tweak-tool \
  gsmartcontrol \
  gstreamer1-plugins-bad-free \
@@ -51,18 +46,18 @@ package_list=\
  kubectl \
  libatomic \
  libcurl \
+ maven \
  nautilus-dropbox \
  nmap \
- redis \
+ nodejs \
+ postgresql \
  slack \
- smartmontools \
- sqlitebrowser \
  sysstat \
- terminator \
  texlive-babel-english \
  texlive-babel-italian \
  texlive-emptypage \
  texlive-etoolbox \
+ texlive-everysel \
  texlive-fancyhdr \
  texlive-latexindent \
  texlive-lipsum \
@@ -77,7 +72,6 @@ package_list=\
  texlive-xetex \
  texlive-xifthen \
  thunderbird \
- tomboy \
  unrar \
  unzip \
  vim \
@@ -88,10 +82,3 @@ dnf update -y && dnf install -y $package_list
 
 ## Enable SSH
 systemctl enable sshd && systemctl start sshd
-
-if [ $ENABLE_CRONTAB == 'y' ]; then
-  ## Add db dump cron job
-  crontab -u marco -r
-  echo "0 * * * *  /home/marco/bin/db-dump" | crontab -u marco -
-fi
-
