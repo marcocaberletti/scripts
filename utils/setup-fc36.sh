@@ -25,7 +25,6 @@ dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicor
 
 package_list=\
 "ansible \
- awscli \
  bind-utils \
  calibre \
  code \
@@ -42,6 +41,7 @@ package_list=\
  gstreamer1-plugins-ugly \
  jq \
  jemalloc \
+ kernel-devel \
  kubectl \
  libatomic \
  libcurl \
@@ -51,6 +51,7 @@ package_list=\
  nodejs \
  packer \
  postgresql \
+ python-pip \
  slack \
  sysstat \
  terraform \
