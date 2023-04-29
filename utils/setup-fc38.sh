@@ -31,6 +31,7 @@ package_list=\
  code \
  dropbox \
  environment-modules \
+ ffmpeg \
  gimp \
  git \
  gnome-extensions-app \
