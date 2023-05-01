@@ -43,6 +43,7 @@ package_list=\
  gstreamer1-plugins-base \
  gstreamer1-plugins-good \
  gstreamer1-plugins-ugly \
+ helm \
  jq \
  jemalloc \
  kernel-devel \
