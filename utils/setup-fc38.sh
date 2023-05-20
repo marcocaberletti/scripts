@@ -48,8 +48,10 @@ package_list=\
  jemalloc \
  kernel-devel \
  kubectl \
+ latexmk \
  libatomic \
  libcurl \
+ lyx \
  maven \
  nautilus-dropbox \
  nmap \
@@ -83,6 +85,9 @@ package_list=\
  texlive-wrapfig \
  texlive-xetex \
  texlive-xifthen \
+ texlive-unicode-math \
+ texlive-trajan \
+ texlive-blindtext \
  thunderbird \
  unrar \
  unzip \
