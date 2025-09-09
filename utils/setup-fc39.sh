@@ -2,41 +2,36 @@
 
 set -xe
 
-ENABLE_CRONTAB=${ENABLE_CRONTAB:-n}
-
 ## Add RPM Fusion repos
 dnf install -y \
 	http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
 	http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-## Install Slack repo
-cp -v /home/marco/programmi/slack.repo /etc/yum.repos.d/slack.repo
+## Install repos
+cp -v /home/marco/programmi/kubernetes.repo /etc/yum.repos.d/
+cp -v /home/marco/programmi/vscode.repo /etc/yum.repos.d/
+cp -v /home/marco/programmi/google-chrome.repo /etc/yum.repos.d/
 
-## Install Kube repo
-cp -v /home/marco/programmi/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
-
-## Install VS Code repo
-rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-
-## Packer repo
+## Hashicorp repo
 dnf install -y dnf-plugins-core
 dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 
 package_list=\
 "ansible \
  bind-utils \
- black \
  calibre \
  code \
  dropbox \
  environment-modules \
+ gedit \
  gh \
  gimp \
  git \
+ google-chrome-stable \
  gnome-extensions-app \
  gnome-shell-extension-appindicator \
- gnome-tweak-tool \
+ gnome-tweaks \
+ groovy \
  gsmartcontrol \
  gstreamer1-plugins-bad-free \
  gstreamer1-plugins-bad-freeworld \
@@ -44,12 +39,14 @@ package_list=\
  gstreamer1-plugins-good \
  gstreamer1-plugins-ugly \
  helm \
+ java-17-openjdk \
  jq \
  jemalloc \
  kernel-devel \
  kubectl \
  latexmk \
  libatomic \
+ libavcodec-freeworld \
  libcurl \
  lyx \
  maven \
@@ -64,7 +61,6 @@ package_list=\
  python3-pytest \
  python3-sphinx \
  pre-commit \
- slack \
  sysstat \
  terraform \
  texlive-babel-english \
@@ -92,12 +88,14 @@ package_list=\
  unrar \
  unzip \
  vim \
- vlc"
+ vlc \
+ vlc-plugin-ffmpeg"
 
 ## Update & install
 dnf update -y
 dnf install -y ffmpeg
 dnf install -y $package_list
+dnf install https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
 
 ## Enable SSH
 systemctl enable sshd && systemctl start sshd
