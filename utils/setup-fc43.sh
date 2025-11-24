@@ -15,7 +15,10 @@ cp -v /home/marco/programmi/google-cloud-sdk.repo /etc/yum.repos.d/
 
 ## Hashicorp repo
 dnf install -y dnf-plugins-core
-dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+dnf config-manager addrepo --from-repofile="https://rpm.releases.hashicorp.com/fedora/hashicorp.repo"
+
+## Docker repo
+dnf config-manager addrepo --from-repofile="https://download.docker.com/linux/fedora/docker-ce.repo"
 
 package_list=\
 "ansible \
@@ -23,11 +26,13 @@ package_list=\
  bind-utils \
  calibre \
  code \
+ discord \
  environment-modules \
  gedit \
  gh \
  gimp \
  git \
+ golang \
  google-chrome-stable \
  google-cloud-cli \
  gnome-extensions-app \
@@ -46,6 +51,7 @@ package_list=\
  postgresql \
  python-pip \
  pre-commit \
+ telnet \
  terraform \
  texlive-babel-english \
  texlive-babel-italian \
@@ -78,6 +84,10 @@ dnf update -y
 #dnf install -y ffmpeg
 dnf install -y $package_list
 #dnf install https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+
+dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+usermod -aG docker marco
+newgrp docker
 
 ## Enable SSH
 systemctl enable sshd && systemctl start sshd
